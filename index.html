@@ -17,7 +17,11 @@
                 packages: [{
                         "name": "js",
                         "location": location.pathname.replace(/\/[^/]+$/, "") + "/js"
-                    }]
+                    }],
+                paths: {
+                    //if you want to host on your own server, download and put in folders then use path like:
+                    agsjs: location.pathname.replace(/\/[^/]+$/, '') + '/src/agsjs'
+                }
             };
         </script>
         <script src="http://js.arcgis.com/3.14/"></script>
@@ -53,9 +57,7 @@
             <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'left', splitter:true" id="leftPane">				
                 <div data-dojo-type="dijit.layout.AccordionContainer">
                     <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Table of Content'">
-                        <p>
-                            Content for pane 4
-                        </p>
+                        <div id="tocDiv"></div>
                     </div>
                     <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Basemaps'">
                         <div id="basemapGallery"></div>
@@ -88,12 +90,12 @@
                 </div>
             </div>
             <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'right'" id="rightPane">
-                    <!-- The Image -->
-                    <div id="myImage">
-                        <img src="images/Plateau_state_map.jpg" border="0" />
-						<img src="images/riyom.jpg" border="0" />
-                    </div>
-					
+                <!-- The Image -->
+                <div id="myImage">
+                    <img src="images/Plateau_state_map.jpg" border="0" />
+                    <img src="images/riyom.jpg" border="0" />
+                </div>
+
             </div>
             <div id="footer" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'bottom'">
                 <div id="dataSource">

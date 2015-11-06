@@ -1,80 +1,105 @@
 <!DOCTYPE html>
 <html> 
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
-      on iOS devices-->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
-    <title></title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
+          on iOS devices-->
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+        <title></title>
 
-    <link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/nihilo/nihilo.css">
-    <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
-    <link rel="stylesheet" href="css/layout.css">
+        <link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/nihilo/nihilo.css">
+        <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+        <link rel="stylesheet" href="css/layout.css">
 
-    <script>var dojoConfig = { parseOnLoad: true };</script>
-    <script src="http://js.arcgis.com/3.14/"></script>
-    <script>
-		require([
-			"dojo/parser", 
-			"dijit/layout/BorderContainer", 
-			"dijit/layout/ContentPane",
-			"dijit/layout/AccordionContainer"]);      
-      var map;
+        <script>
+            var dojoConfig = {
+                parseOnLoad: true,
+                packages: [{
+                        "name": "js",
+                        "location": location.pathname.replace(/\/[^/]+$/, "") + "/js"
+                    }]
+            };
+        </script>
+        <script src="http://js.arcgis.com/3.14/"></script>
+        <script>
+            require([
+                "dojo/parser",
+                "dijit/layout/BorderContainer",
+                "dijit/layout/ContentPane",
+                "dijit/layout/AccordionContainer"]);
+        </script>
 
-    </script>
-	<script src="js/LoadMap.js"></script>
-  </head>
-  
-  <body class="nihilo">
-    <div id="mainWindow" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:'headline'"
-     style="width:100%; height:100%;">
-      <div id="header" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top'">
-        <div id="title">
-			<!-- -->
-			<div id="NCRSLogo">
-			  <img src="images/NARSDA LOGO.jpg" border="0" />
-			</div>
-			
-			PLATEAU STATE GEOPROPERTY TAX INFORMATION MANAGEMENT SYSTEM 
-        </div>
-        <div id="subtitle">
-			Powered by National Centre for Remote Sensing, Jos
-        </div>
-      </div>
-	  
-      <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'left', splitter:true" id="leftPane">
-        <div data-dojo-type="dijit.layout.AccordionContainer">
-			<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Table of Content'">
-				<p>
-				  Content for pane 4
-				</p>
-			  </div>
-			  <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Basemaps'">
-				Content for pane 1
-			  </div>
-			  <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Layers'">
-				<p>
-				  Content for pane 2
-				</p>
-			  </div>
-			  <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Legend'">
-				<p>
-				  Content for pane 3
-				</p>
-			  </div>
-        </div>
-      </div>
-      <div id="map" class="shadow" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'">
+        <!-- Reference external JavaScript file -->
+        <script src="js/LoadMap.js"></script>
 
-      </div>
-      <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'right'" id="rightPane">
-        This is the right section
-      </div>
-      <div id="footer" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'bottom'">
-        <div id="dataSource">
+    </head>
+    <body class="nihilo">
+        <div id="mainWindow" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:'headline'"
+             style="width:100%; height:100%;">
+            <div id="header" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top'">
+                <div id="title">
+                    <!-- The Logo -->
+                    <div id="NCRSLogo">
+                        <img src="images/NARSDA LOGO.jpg" border="0" />
+                    </div>
+
+                    PLATEAU STATE GEOPROPERTY TAX INFORMATION MANAGEMENT SYSTEM 
+                </div>
+                <div id="subtitle">
+                    Powered by National Centre for Remote Sensing, Jos
+                </div>
+            </div>
+
+            <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'left', splitter:true" id="leftPane">				
+                <div data-dojo-type="dijit.layout.AccordionContainer">
+                    <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Table of Content'">
+                        <p>
+                            Content for pane 4
+                        </p>
+                    </div>
+                    <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Basemaps'">
+                        <div id="basemapGallery"></div>
+                    </div>
+                    <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Layers'">
+                        <p>
+                            Content for pane 2
+                        </p>
+                    </div>
+                    <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Legend'">
+                        <p>
+                            Content for pane 3
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="map" class="shadow" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'">
+                <!-- Position home button -->
+                <div id="HomeButton"></div>
+
+                <!-- Position locate button -->
+                <div id="LocateButton"></div>
+
+                <!-- Measurement Div -->
+                <div style="position:absolute; right:20px; top:10px; z-Index:999;">
+                    <div id="titlePane" data-dojo-type="dijit/TitlePane" data-dojo-props="title:'Measurement', closable:'false', open:'false'">
+                        <div id="measureDiv"></div>
+                        <span style="font-size:smaller;padding:5px 5px;">Press <b>CTRL</b> to enable snapping.</span>
+                    </div>
+                </div>
+            </div>
+            <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'right'" id="rightPane">
+                    <!-- The Image -->
+                    <div id="myImage">
+                        <img src="images/Plateau_state_map.jpg" border="0" />
+						<img src="images/riyom.jpg" border="0" />
+                    </div>
+					
+            </div>
+            <div id="footer" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'bottom'">
+                <div id="dataSource">
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </body>
+    </body>
 
 </html>

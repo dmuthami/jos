@@ -79,6 +79,13 @@ body {
     font-size: smaller; 
     padding: 5px 5px; 
     visibility: hidden}
+#search {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: 25px;
+    left: 60px;
+}
 
 #leftPane {
     width:150px;
@@ -93,7 +100,17 @@ body {
     border:solid 4px #79663b;
     margin:5px;
 }
+#note {
+    font-size: 80%;
+    font-weight: 700;
+    padding: 0 0 10px 0;
+    text-align: justify;
+}
 
+#info {
+    padding: 10px 0 0 0;
+    text-align: justify;
+}
 .shadow {
     -o-border-radius:6px;
     -moz-border-radius:6px;
@@ -109,4 +126,70 @@ body {
     margin-left:4px;
     margin-right:4px;
     color:#5c8503;
+}
+
+/* Change color of icons to match bar chart and selection symbol */
+.esriPopup.dark div.titleButton, 
+.esriPopup.dark div.titlePane .title,
+.esriPopup.dark div.actionsPane .action {
+    color: #A4CE67;
+}
+
+/* Additional customizations */
+.esriPopup.dark .esriPopupWrapper {
+    border: none;
+}
+
+.esriPopup .contentPane {
+    text-align: center;
+}
+
+.esriViewPopup .gallery {
+    margin: 0 auto;
+}
+
+.esriPrintout {
+    color: #fff !important;
+    background: #749a02;
+    padding: 5px;
+    font-weight: bold;
+    box-shadow: 0 0 5px #888;
+    border-radius: 5px;
+    border: 1px solid #8AC007;
+    animation: glowIt 2s infinite;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px #888;
+    -webkit-border-radius: 5px;
+    -webkit-animation: glowIt 2s infinite;
+}
+/* Standard syntax */
+@keyframes glowIt {
+    0% {
+        background-color: #749a02;
+        box-shadow: 0 0 5px #888;
+    }
+    50% {
+        background-color: #91bd09;
+        box-shadow: 0 0 15px #91bd09;
+    }
+    100% {
+        background-color: #749a02;
+        box-shadow: 0 0 5px #888;
+    }
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes glowIt {
+    0% {
+        background-color: #749a02;
+        -webkit-box-shadow: 0 0 5px #888;
+    }
+    50% {
+        background-color: #91bd09;
+        -webkit-box-shadow: 0 0 15px #91bd09;
+    }
+    100% {
+        background-color: #749a02;
+        -webkit-box-shadow: 0 0 5px #888;
+    }
 }

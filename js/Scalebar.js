@@ -7,7 +7,7 @@
 define([
     "dojo/_base/declare",
     "dojo/_base/lang",
-	"dojo/parser",
+    "dojo/parser",
     "esri/dijit/Scalebar"
 ],
         function(
@@ -16,20 +16,20 @@ define([
                 ) {
             return declare(null, {
                 map: null,
-				scalebarUnit: null,
+                scalebarUnit: null,
                 constructor: function(/*Object*/ kwArgs) {
                     parser.parse();
                     lang.mixin(this, kwArgs);
                 },
                 //create the layer objects
                 showScaleBar: function() {
-					var scalebar = new Scalebar({
-					  map: this.map,
-					  // "dual" displays both miles and kilmometers
-					  // "english" is the default, which displays miles
-					  // use "metric" for kilometers
-					  scalebarUnit: this.scalebarUnit
-					});
+                    var scalebar = new Scalebar({
+                        map: this.map,
+                        // "dual" displays both miles and kilmometers
+                        // "english" is the default, which displays miles
+                        // use "metric" for kilometers
+                        scalebarUnit: this.scalebarUnit
+                    });
 
                 }
             });

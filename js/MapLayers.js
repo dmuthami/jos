@@ -37,11 +37,11 @@ define([
                 createLayerObjects: function() {
 
                     //Initialize buildings feature layers
-					/*
-						Public URL: http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/0
-						Private URL :  http://localhost:6080/arcgis/rest/services/NCRS/JOS3/MapServer/0
-					 */
-					var url = "http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/0";
+                    /*
+                     Public URL: http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/0
+                     Private URL :  http://localhost:6080/arcgis/rest/services/NCRS/JOS3/MapServer/0
+                     */
+                    var url = "http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/0";
                     var buildingLayer = new FeatureLayer(url, {
                         mode: FeatureLayer.MODE_ONDEMAND,
                         outFields: ["*"],
@@ -51,11 +51,11 @@ define([
                     this.layerArr.push(buildingLayer);
 
                     //Initialize parcels feature layers
-					/*
-						Public URL: http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/1
-						Private URL :  http://localhost:6080/arcgis/rest/services/NCRS/JOS3/MapServer/1
-					 */
-					url = "http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/1";
+                    /*
+                     Public URL: http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/1
+                     Private URL :  http://localhost:6080/arcgis/rest/services/NCRS/JOS3/MapServer/1
+                     */
+                    url = "http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/1";
                     var parcelLayer = new FeatureLayer(url, {
                         mode: FeatureLayer.MODE_ONDEMAND,
                         outFields: ["*"],

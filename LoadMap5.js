@@ -1,3 +1,4 @@
+var map,dialog;
 require([
     "esri/map",
     /*custom classes*/
@@ -10,10 +11,17 @@ require([
     "js/Popup",
     "js/MapLegend",
     "agsjs/dijit/TOC",
-	"js/Scalebar",
     /*end of custom classes*/
     "esri/layers/ArcGISDynamicMapServiceLayer",
-    "dojo/domReady!"],
+    "dojo/domReady!",
+	 /*aaded */
+	 "esri/layers/FeatureLayer",  "esri/tasks/query", "esri/tasks/QueryTask",
+        "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol", 
+        "esri/renderers/SimpleRenderer", "esri/graphic", "esri/lang",
+        "esri/Color", "dojo/number", "dojo/dom-style", "dojo/dom","dojo/on",
+        "dijit/TooltipDialog", "dijit/popup", "dojo/domReady!"
+	
+	],
         function(Map,
                 /*custom classes*/
                 MapLayers,
@@ -22,12 +30,19 @@ require([
                 LocateButton,
                 Measurement,
                 OverviewMap,
+				FeatureLayer,
                 Popup,
                 MapLegend,
                 TOC,
-				Scalebar,
                 /*end of custom classes*/
-                ArcGISDynamicMapServiceLayer) {
+                ArcGISDynamicMapServiceLayer,
+				QueryTask,Query,
+                SimpleFillSymbol, SimpleLineSymbol,
+                SimpleRenderer, Graphic, esriLang,
+                Color, number, domStyle, 
+                TooltipDialog, dijitPopup,on,dom
+				
+				) {
 
             //Specify extent
             var extentInitial = new esri.geometry.Extent({
@@ -41,7 +56,7 @@ require([
             });
 
             //Create Map Object
-            var map = new Map("map", {
+              map = new Map("map", {
                 extent: extentInitial,
                 basemap: "topo"
             });
@@ -264,17 +279,65 @@ require([
                 }
 
             });
+			 // using feature layer
+			// var search1=document.getElementById('search');
+			// on(search1,'click',function(evt){
+  
+        var josbuildings = new FeatureLayer("http://localhost:6080/arcgis/rest/services/propertyTax/josmap/MapServer/0", {
+          mode: FeatureLayer.MODE_SNAPSHOT,
+          outFields: ["LRNO","BUILDING_N","OWNER", "PROPERTY_V", "PAYMENT_ST"]
+        });
+        josbuildings.setDefinitionExpression("PAYMENT_ST = 'NOT PAID'");
+
+        var symbol = new SimpleFillSymbol(
+          SimpleFillSymbol.STYLE_SOLID, 
+          new SimpleLineSymbol(
+            SimpleLineSymbol.STYLE_SOLID, 
+            new Color([30,0,255,0.35]), 
+            1
+          ),
+          new Color([0,255,60,0.35])
+        );
+        josbuildings.setRenderer(new SimpleRenderer(symbol));
+        map.addLayer(josbuildings);
+
+        map.infoWindow.resize(245,125);
+        
+        dialog = new TooltipDialog({
+          id: "tooltipDialog",
+          style: "position: absolute; width: 250px; font: normal normal normal 10pt Helvetica;z-index:100"
+        });
+        dialog.startup();
+        
+        var highlightSymbol = new SimpleFillSymbol(
+          SimpleFillSymbol.STYLE_SOLID, 
+          new SimpleLineSymbol(
+            SimpleLineSymbol.STYLE_SOLID, 
+            new Color([255,0,0]), 3
+          ), 
+          new Color([125,125,125,0.35])
+        );
+		//when fired, create a new graphic with the geometry from the event.graphic and add it to the maps graphics layer
+        josbuildings.on("mouse-over", function(evt){
+          var t = "<b>${OWNER}</b><hr><b>Building NO: </b>${BUILDING_N}<br>"
+            + "<b>Value: </b>${PROPERTY_V}<br>";
+            
+  
+          var content = esriLang.substitute(evt.graphic.attributes,t);
+          var highlightGraphic = new Graphic(evt.graphic.geometry,highlightSymbol);
+          map.graphics.add(highlightGraphic);
+          
+          dialog.setContent(content);
+
+          domStyle.set(dialog.domNode, "opacity", 0.85);
+          dijitPopup.open({
+            popup: dialog, 
+            x: evt.pageX,
+            y: evt.pageY
+          });
+        });
+     //});
 			
-		    /* Overview Map*/
-            var scalebar = new Scalebar(
-                    {
-                        map: map,
-                        scalebarUnit: "dual"
-                    }
-            );
-            scalebar.showScaleBar();	
-			
-			//Code to do stuff
 			
         });
 

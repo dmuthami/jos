@@ -56,16 +56,21 @@
 
             <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'left', splitter:true" id="leftPane">				
                 <div data-dojo-type="dijit.layout.AccordionContainer">
-                    <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Table of Content'">
+                    <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Layers'">
                         <div id="tocDiv"></div>
                     </div>
                     <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Basemaps'">
                         <div id="basemapGallery"></div>
                     </div>
-                    <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Layers'">
-                        <p>
-                            Content for pane 2
-                        </p>
+                    <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Search'">
+						<form>
+						Paid
+						<select>
+							<option value = 'Paid'>Paid</option>
+							<option value = 'Not Paid'>Not Paid</option>
+						</select></br>
+						<button id = 'search'>Search</button>
+						</form>
                     </div>
                     <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="title:'Legend'">
                         <p>
@@ -100,6 +105,7 @@
             <div id="footer" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'bottom'">
                 <div id="dataSource">
                 </div>
+				<marquee behaviour = "scroll" direction = "left"> HTML scrolling text sample for you!!</marquee>
             </div>
         </div>
     </body>

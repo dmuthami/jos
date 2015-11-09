@@ -100,6 +100,9 @@ body {
     border:solid 4px #79663b;
     margin:5px;
 }
+#legendPane {
+    border: solid #97DCF2 1px;
+}
 #note {
     font-size: 80%;
     font-weight: 700;

@@ -11,11 +11,11 @@ define([
                 InfoTemplate
                 ) {
             var mapp;
-			var myarr;
+            var myarr;
             return {
-                loadSearch: function(map,arr) {
+                loadSearch: function(map, arr) {
                     mapp = map;
-					myarr = arr
+                    myarr = arr
                     try {
                         //Instantiate new search widget
                         var s = new Search({

@@ -3,11 +3,11 @@ define([
     "agsjs/dijit/TOC"],
         function(declare, TOC) {
             var arr;
-			var mapp;
+            var mapp;
             return {
                 showTOC: function(arr, mapp) {
                     this.arr = arr;
-					this.mapp = mapp;
+                    this.mapp = mapp;
                     try {
                         toc = new TOC({
                             map: this.mapp,

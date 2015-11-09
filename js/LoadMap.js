@@ -10,12 +10,14 @@ require([
     "js/Popup",
     "js/MapLegend",
     "js/Scalebar",
-	"js/MToc",
+    "js/MToc",
     /*end of custom classes*/
     /*custom classes for Search*/
-	"js/MSearch",
+    "esri/dijit/Legend",
+    "dojo/_base/array",
+    "dojo/parser",
+    "js/MSearch",
     /*end of custom classes or Search*/
-    "esri/layers/ArcGISDynamicMapServiceLayer",
     "dojo/domReady!"],
         function(Map,
                 /*custom classes*/
@@ -28,12 +30,15 @@ require([
                 Popup,
                 MapLegend,
                 Scalebar,
-				MToc,				
+                MToc,
                 /*end of custom classes*/
                 /*custom classes for Search*/
-                MSearch,
+                Legend,
+                arrayUtils,
+                parse,
+                MSearch
                 /*end of custom classes or Search*/
-                ArcGISDynamicMapServiceLayer) {
+                ) {
 
             //Specify extent
             var extentInitial = new esri.geometry.Extent({
@@ -240,9 +245,27 @@ require([
                  * Change default visible layers 
                  * dynaLayer1.setVisibleLayers([2, 5, 8, 11]);
                  */
-				 
-				//Call function to load Table of Contents
-				MToc.showTOC(arr,map);				
+
+                //Call function to load Table of Contents
+                MToc.showTOC(arr, map);
+                /*
+                 var mapLegend = new MapLegend(
+                 {
+                 map: map,
+                 evt: evt
+                 }
+                 );
+                 mapLegend.createLegend();*/
+                var layerInfo = arrayUtils.map(evt.layers, function(layer, index) {
+                    return {layer: layer.layer, title: layer.layer.name};
+                });
+                if (layerInfo.length > 0) {
+                    var legendDijit = new Legend({
+                        map: map,
+                        layerInfos: layerInfo
+                    }, "legendDiv");
+                    legendDijit.startup();
+                }
 
             });
 
@@ -258,10 +281,10 @@ require([
             //Code to do stuff for Searching
 
             /*
-			 *Call functions on load
-			 * Begin  with load search
-			 */
-            map.on("load", MSearch.loadSearch(map,arr));
+             *Call functions on load
+             * Begin  with load search
+             */
+            map.on("load", MSearch.loadSearch(map, arr));
 
         });
 

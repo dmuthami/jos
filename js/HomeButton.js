@@ -10,7 +10,12 @@ define(["dojo/_base/declare",
     "esri/dijit/HomeButton",
     "dojo/domReady!"
 ],
-        function(declare, lang, map, HomeButton, domReady) {
+        function(
+                declare,
+                lang,
+                map,
+                HomeButton,
+                domReady) {
             return declare(null, {
                 map: null,
                 constructor: function(/*Object*/ kwArgs) {

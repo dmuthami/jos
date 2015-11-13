@@ -23,18 +23,18 @@ define([
                 FeatureLayer,
                 Legend,
                 arrayUtils,
-                parse
+                parser
                 ) {
             return declare(null, {
                 map: null,
-                evt: null,
+                layers: null,
                 constructor: function(/*Object*/ kwArgs) {
                     lang.mixin(this, kwArgs);
                     parser.parse();
                 },
                 //create the layer objects
                 createLegend: function() {
-                    var layerInfo = arrayUtils.map(this.evt.layers, function(layer, index) {
+                    var layerInfo = arrayUtils.map(this.layers, function(layer, index) {
                         return {layer: layer.layer, title: layer.layer.name};
                     });
                     if (layerInfo.length > 0) {

@@ -11,7 +11,9 @@ define([
     "esri/dijit/Scalebar"
 ],
         function(
-                declare, lang, parser,
+                declare,
+                lang,
+                parser,
                 Scalebar
                 ) {
             return declare(null, {

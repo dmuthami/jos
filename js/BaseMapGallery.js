@@ -15,7 +15,15 @@ define(["dojo/_base/declare",
     "dijit/TitlePane",
     "dojo/domReady!"
 ],
-        function(declare, lang, map, BasemapGallery, arcgisUtils, parser, domReady) {
+        function(
+                declare,
+                lang,
+                map,
+                BasemapGallery,
+                arcgisUtils,
+                parser,
+                domReady
+                ) {
             return declare(null, {
                 map: null,
                 showArcGISBasemaps: null,

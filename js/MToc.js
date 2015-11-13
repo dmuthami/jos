@@ -14,11 +14,17 @@ define([
                             layerInfos: [
                                 {
                                     layer: this.arr[0],
+                                    title: "Towns"
+                                            //collapsed: false, // whether this root layer should be collapsed initially, default false.
+                                            //slider: false // whether to display a transparency slider.
+                                },
+                                {
+                                    layer: this.arr[1],
                                     title: "Building"
                                             //collapsed: false, // whether this root layer should be collapsed initially, default false.
                                             //slider: false // whether to display a transparency slider.
                                 }, {
-                                    layer: this.arr[1],
+                                    layer: this.arr[2],
                                     title: "Parcel"
                                             //collapsed: false, // whether this root layer should be collapsed initially, default false.
                                             //slider: false // whether to display a transparency slider.

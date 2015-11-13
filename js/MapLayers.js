@@ -35,13 +35,27 @@ define([
                 },
                 //create the layer objects
                 createLayerObjects: function() {
+                    //Initialize buildings feature layers
+                    /*
+                     Public URL: http://54.225.91.55/arcgis/rest/services/Nairobi_County/Towns/MapServer/0
+                     Private URL :  http://localhost:6080/arcgis/rest/services/NCRS/Towns/MapServer/0
+                     */
+                    var url = "http://localhost:6080/arcgis/rest/services/NCRS/Towns/MapServer/0";
+                    var townsLayer = new FeatureLayer(url, {
+                        mode: FeatureLayer.MODE_ONDEMAND,
+                        outFields: ["*"],
+                        /**/infoTemplate: this.infoTemplate['towns'],
+                        id: "townsLayer"
+                    });
+                    this.layerArr.push(townsLayer);
+
 
                     //Initialize buildings feature layers
                     /*
                      Public URL: http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/0
                      Private URL :  http://localhost:6080/arcgis/rest/services/NCRS/JOS3/MapServer/0
                      */
-                    var url = "http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/0";
+                    var url = "http://localhost:6080/arcgis/rest/services/NCRS/JOS3/MapServer/0";
                     var buildingLayer = new FeatureLayer(url, {
                         mode: FeatureLayer.MODE_ONDEMAND,
                         outFields: ["*"],
@@ -55,7 +69,7 @@ define([
                      Public URL: http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/1
                      Private URL :  http://localhost:6080/arcgis/rest/services/NCRS/JOS3/MapServer/1
                      */
-                    url = "http://54.225.91.55/arcgis/rest/services/Nairobi_County/JOS3/MapServer/1";
+                    url = "http://localhost:6080/arcgis/rest/services/NCRS/JOS3/MapServer/1";
                     var parcelLayer = new FeatureLayer(url, {
                         mode: FeatureLayer.MODE_ONDEMAND,
                         outFields: ["*"],

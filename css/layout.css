@@ -103,12 +103,6 @@ body {
 #legendPane {
     border: solid #97DCF2 1px;
 }
-#note {
-    font-size: 80%;
-    font-weight: 700;
-    padding: 0 0 10px 0;
-    text-align: justify;
-}
 
 #info {
     padding: 10px 0 0 0;
@@ -195,4 +189,42 @@ body {
         background-color: #749a02;
         -webkit-box-shadow: 0 0 5px #888;
     }
+}
+
+/*Print Component CSS */
+
+#feedback {
+    background: #fff;
+    color: #000;
+    position: relative;
+    font-family: arial;
+    height: auto;
+    right: 20px;
+    margin: 5px;
+    padding: 10px;
+    top: 20px;
+    width: 120px;
+    z-index: 40;
+}
+
+#feedback a {
+    border-bottom: 1px solid #888;
+    color: #444;
+    text-decoration: none;
+}
+
+#feedback a:hover, #feedback a:active, #feedback a:visited {
+    border: none;
+    color: #444;
+    text-decoration: none;
+}
+h3 {
+    margin: 0 0 5px 0;
+    border-bottom: 1px solid #444;
+    padding: 0 0 5px 0;
+    text-align: center;
+}
+
+#info {
+    padding: 2px 0 0 0;
 }

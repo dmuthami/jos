@@ -11,11 +11,9 @@ require([
     "js/MapLegend",
     "js/Scalebar",
     "js/MToc",
+    "js/WebPrint",
     /*end of custom classes*/
     /*custom classes for Search*/
-    "esri/dijit/Legend",
-    "dojo/_base/array",
-    "dojo/parser",
     "js/MSearch",
     /*end of custom classes or Search*/
     "dojo/domReady!"],
@@ -31,11 +29,9 @@ require([
                 MapLegend,
                 Scalebar,
                 MToc,
+                WebPrint,
                 /*end of custom classes*/
                 /*custom classes for Search*/
-                Legend,
-                arrayUtils,
-                parse,
                 MSearch
                 /*end of custom classes or Search*/
                 ) {
@@ -65,8 +61,20 @@ require([
             //Define key value pair object for Popups
             var popUpObject = {};
 
+            //Define pop up for towns areas
+            var title = "Towns";
+            fieldInfos = [
+                {
+                    fieldName: "VILLAGES",
+                    label: "Villages:",
+                    visible: true
+                }
+            ]
+            var townsTemplate = popup.showPopUp(title, fieldInfos);
+            popUpObject['towns'] = townsTemplate
+
             //Define pop up for building areas
-            var title = "Building";
+            title = "Building";
             fieldInfos = [
                 {
                     fieldName: "LRNO",
@@ -225,19 +233,12 @@ require([
             );
             overviewMap.loadOverViewMap();
 
-            /* Overview Map*/
+            arr = mapLayers.getMapLayers(); //Get array populated with layers
 
             /*
-             var mapLegend = new MapLegend(
-             {
-             map: map,
-             layerArr: mapLayers.getMapLayers()
-             }
-             );
-             mapLegend.createLegend();
+             * Wire "layers-add-result" with anonymous function
+             * 
              */
-
-            arr = mapLayers.getMapLayers();
             map.on('layers-add-result', function(evt) {
                 // overwrite the default visibility of service.
                 // TOC will honor the overwritten value.
@@ -248,23 +249,19 @@ require([
 
                 //Call function to load Table of Contents
                 MToc.showTOC(arr, map);
-                /*
-                 var mapLegend = new MapLegend(
-                 {
-                 map: map,
-                 evt: evt
-                 }
-                 );
-                 mapLegend.createLegend();*/
-                var layerInfo = arrayUtils.map(evt.layers, function(layer, index) {
-                    return {layer: layer.layer, title: layer.layer.name};
-                });
-                if (layerInfo.length > 0) {
-                    var legendDijit = new Legend({
-                        map: map,
-                        layerInfos: layerInfo
-                    }, "legendDiv");
-                    legendDijit.startup();
+
+                /* Code to create map legend*/
+                try {
+                    var mapLegend = new MapLegend(
+                            {
+                                map: map,
+                                layers: evt.layers
+                            }
+                    );
+                    mapLegend.createLegend();
+                }
+                catch (err) {
+                    console.log("Maplegend object in LoadMap.js \n" + err.message)
                 }
 
             });
@@ -285,6 +282,14 @@ require([
              * Begin  with load search
              */
             map.on("load", MSearch.loadSearch(map, arr));
+
+            /*Print Functionality*/
+            var webPrint = new WebPrint(
+                    {
+                        map: map
+                    }
+            );
+            webPrint.firePrintWidget();
 
         });
 

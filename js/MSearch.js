@@ -45,7 +45,7 @@ define([
                                 "Land Registration No: ${LRNO}";
                         //Add building source to search
                         sources.push({
-                            featureLayer: myarr[0],
+                            featureLayer: myarr[1],
                             searchFields: ["OWNER"],
                             displayField: "Owner",
                             exactMatch: false,
@@ -73,9 +73,9 @@ define([
                                 "Tax Value: ${TAX_VALUE}</br>" +
                                 "Payment: ${PAYMENT}</br>" +
                                 "Payment Date: ${PAYMENT_DA}</br>"
-                        //Add parcel advertisement source to search
+                        //Add parcel source to search
                         sources.push({
-                            featureLayer: myarr[1],
+                            featureLayer: myarr[2],
                             searchFields: ["LRNO", "PAYMENT_ST"],
                             displayField: "LRNO",
                             exactMatch: false,

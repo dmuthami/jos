@@ -38,7 +38,7 @@ define([
                         });
                     }
                     catch (err) {
-                        console.log(err.message);
+                        console.log("showTOC: function (MToc.js) "+err.message);
                     }
                 }
             };

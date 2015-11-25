@@ -97,7 +97,7 @@ define([
                         s.startup();
                     }
                     catch (err) {
-                        console.log(err.message);
+                        console.log("loadSearch: function (MSearch.js) "+err.message);
                     }
                 }
             };

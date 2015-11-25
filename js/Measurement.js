@@ -37,17 +37,28 @@ define([
                 defaultAreaUnit: null,
                 defaultLengthUnit: null,
                 constructor: function(/*Object*/ kwArgs) {
-                    parser.parse();
-                    lang.mixin(this, kwArgs);
+					try {
+						parser.parse();
+						lang.mixin(this, kwArgs);	
+					}
+					catch(err){
+						console.log("constructor: function (Measurement.js) "+err.message);
+					}					
                 },
                 showMeasurement: function() {
-                    //add the basemap gallery, in this case we'll display maps from ArcGIS.com including bing maps
-                    var measurement = new Measurement({
-                        map: this.map,
-                        defaultAreaUnit: this.defaultAreaUnit,
-                        defaultLengthUnit: this.defaultLengthUnit
-                    }, "measureDiv");
-                    measurement.startup();
+					try {
+						//add the basemap gallery, in this case we'll display maps from ArcGIS.com including bing maps
+						var measurement = new Measurement({
+							map: this.map,
+							defaultAreaUnit: this.defaultAreaUnit,
+							defaultLengthUnit: this.defaultLengthUnit
+						}, "measureDiv");
+						measurement.startup();	
+					}
+					catch(err){
+						console.log("showMeasurement: function (Measurement.js) "+err.message);
+					}					
+
                 }
             });
         });

@@ -19,14 +19,24 @@ define(["dojo/_base/declare",
             return declare(null, {
                 map: null,
                 constructor: function(/*Object*/ kwArgs) {
-                    lang.mixin(this, kwArgs);
+					try {
+						lang.mixin(this, kwArgs);	
+					}
+					catch(err){
+						console.log("constructor: function (HomeButton.js) "+err.message);
+					}					
                 },
                 showHomeButton: function() {
-                    //Home button used to zoom back to original extent
-                    var home = new HomeButton({
-                        map: this.map
-                    }, "HomeButton");
-                    home.startup();
+					try {
+						//Home button used to zoom back to original extent
+						var home = new HomeButton({
+							map: this.map
+						}, "HomeButton");
+						home.startup();	
+					}
+					catch(err){
+						console.log("showHomeButton: function (HomeButton.js) "+err.message);
+					}				
                 }
             });
         });

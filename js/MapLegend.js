@@ -29,22 +29,32 @@ define([
                 map: null,
                 layers: null,
                 constructor: function(/*Object*/ kwArgs) {
-                    lang.mixin(this, kwArgs);
-                    parser.parse();
+					try {
+						lang.mixin(this, kwArgs);
+						parser.parse();	
+					}
+					catch(err){
+						console.log("constructor: function (MapLegend.js) "+err.message);
+					}					
                 },
                 //create the layer objects
                 createLegend: function() {
-                    var layerInfo = arrayUtils.map(this.layers, function(layer, index) {
-                        return {layer: layer.layer, title: layer.layer.name};
-                    });
-                    if (layerInfo.length > 0) {
-                        var legendDijit = new Legend({
-                            map: this.map,
-                            layerInfos: layerInfo
-                        }, "legendDiv");
-                        legendDijit.startup();
-                    }
-
+					try {
+						var layerInfo = arrayUtils.map(this.layers, function(layer, index) {
+							return {layer: layer.layer, title: layer.layer.name};
+						});
+						if (layerInfo.length > 0) {
+							var legendDijit = new Legend({
+								map: this.map,
+								respectCurrentMapScale : "True",
+								layerInfos: layerInfo
+							}, "legendDiv");
+							legendDijit.startup();
+						}	
+					}
+					catch(err){
+						console.log("createLegend: function (MapLegend.js) "+err.message);
+					}					
                 }
             });
         });

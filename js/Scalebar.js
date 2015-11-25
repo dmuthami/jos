@@ -20,19 +20,28 @@ define([
                 map: null,
                 scalebarUnit: null,
                 constructor: function(/*Object*/ kwArgs) {
-                    parser.parse();
-                    lang.mixin(this, kwArgs);
+					try {
+						parser.parse();
+						lang.mixin(this, kwArgs);	
+					}
+					catch(err){
+						console.log("constructor: function (Scalebar.js) "+err.message);
+					}
                 },
                 //create the layer objects
                 showScaleBar: function() {
-                    var scalebar = new Scalebar({
-                        map: this.map,
-                        // "dual" displays both miles and kilmometers
-                        // "english" is the default, which displays miles
-                        // use "metric" for kilometers
-                        scalebarUnit: this.scalebarUnit
-                    });
-
+					try {
+						var scalebar = new Scalebar({
+							map: this.map,
+							// "dual" displays both miles and kilmometers
+							// "english" is the default, which displays miles
+							// use "metric" for kilometers
+							scalebarUnit: this.scalebarUnit
+						});						
+					}
+					catch(err){
+						console.log("showScaleBar: function (Scalebar.js) "+err.message);
+					}
                 }
             });
         });

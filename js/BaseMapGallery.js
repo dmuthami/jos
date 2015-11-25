@@ -28,16 +28,27 @@ define(["dojo/_base/declare",
                 map: null,
                 showArcGISBasemaps: null,
                 constructor: function(/*Object*/ kwArgs) {
-                    parser.parse();
-                    lang.mixin(this, kwArgs);
+					try {
+						parser.parse();
+						lang.mixin(this, kwArgs);	
+					}
+					catch(err){
+						console.log("constructor: function (BasemapGallery.js) "+err.message);
+					}					
                 },
                 showBasemapGallery: function() {
-                    //add the basemap gallery, in this case we'll display maps from ArcGIS.com including bing maps
-                    var basemapGallery = new BasemapGallery({
-                        map: this.map,
-                        showArcGISBasemaps: this.showArcGISBasemaps
-                    }, "basemapGallery");
-                    basemapGallery.startup();
+					try {
+						//add the basemap gallery, in this case we'll display maps from ArcGIS.com including bing maps
+						var basemapGallery = new BasemapGallery({
+							map: this.map,
+							showArcGISBasemaps: this.showArcGISBasemaps
+						}, "basemapGallery");
+						basemapGallery.startup();	
+					}
+					catch(err){
+						console.log("showBasemapGallery: function (BasemapGallery.js) "+err.message);
+					}					
+
                 }
             });
         });

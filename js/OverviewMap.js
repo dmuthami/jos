@@ -17,14 +17,24 @@ define(["dojo/_base/declare",
                 map: null,
                 visible: null,
                 constructor: function(/*Object*/ kwArgs) {
-                    lang.mixin(this, kwArgs);
+					try {
+						lang.mixin(this, kwArgs);	
+					}
+					catch(err){
+						console.log("constructor: function (OverviewMap.js) "+err.message);
+					}				
                 },
                 loadOverViewMap: function() {
-                    var overviewMapDijit = new OverviewMap({
-                        map: this.map,
-                        visible: this.visible
-                    });
-                    overviewMapDijit.startup();
+					try {
+						var overviewMapDijit = new OverviewMap({
+							map: this.map,
+							visible: this.visible
+						});
+						overviewMapDijit.startup();	
+					}
+					catch(err){
+						console.log("loadOverViewMap: function (OverviewMap.js) "+err.message);
+					}					
                 }
             });
         });

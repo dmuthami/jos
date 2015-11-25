@@ -14,14 +14,24 @@ define(["dojo/_base/declare",
             return declare(null, {
                 map: null,
                 constructor: function(/*Object*/ kwArgs) {
-                    lang.mixin(this, kwArgs);
+					try {
+						lang.mixin(this, kwArgs);	
+					}
+					catch(err){
+						console.log("constructor: function (LocateButton.js) "+err.message);
+					}					
                 },
                 showLocateButton: function() {
-                    //Create an instance of a locate button
-                    var geoLocate = new LocateButton({
-                        map: this.map
-                    }, "LocateButton");
-                    geoLocate.startup();
+					try {
+						//Create an instance of a locate button
+						var geoLocate = new LocateButton({
+							map: this.map
+						}, "LocateButton");
+						geoLocate.startup();	
+					}
+					catch(err){
+						console.log("showLocateButton: function (LocateButton.js) "+err.message);
+					}					
                 }
             });
         });
